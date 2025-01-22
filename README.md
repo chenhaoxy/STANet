@@ -6,7 +6,9 @@ Human motion prediction is crucial for enabling machines and intelligent agents 
 ```
 python main_3d.py --data_dir [Path To Your H36M data] --input_n 10 --output_n 10 --dct_n 20 --exp [Path To Your H36M model]
 ```
+```
 python main_3d.py --data_dir [Path To Your H36M data] --input_n 10 --output_n 25 --dct_n 35 --exp [Path To Your H36M model]
+```
 ```
 python main_cmu_3d.py --data_dir_cmu [Path To Your CMU data] --input_n 10 --output_n 10 --dct_n 20 --exp [Path To Your CMU model]
 ```
