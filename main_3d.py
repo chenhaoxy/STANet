@@ -71,7 +71,7 @@ def main(opt):
 
     acts = data_utils.define_actions('all')
     test_data = dict()
-    # *******获取所有动作的平均误差
+    #
 
     all_dataset = H36motion3D(path_to_data=opt.data_dir, actions='all', input_n=input_n, output_n=output_n, split=1,
                                sample_rate=sample_rate, dct_used=dct_n)
@@ -140,7 +140,7 @@ def main(opt):
         test_3d_temp = np.array([])
         test_3d_head = np.array([])
 
-        # *******获取所有动作的平均误差
+        #
         test_3d, limb_ls, even_point = tes(all_dataloader, model, input_n=input_n, output_n=output_n, is_cuda=is_cuda,
                                                                       dim_used=train_dataset.dim_used, dct_n=dct_n)
         ret_log = np.append(ret_log, test_3d)
@@ -305,20 +305,13 @@ def tes(train_loader, model, input_n=20, output_n=50, is_cuda=False, dim_used=[]
         pred_p3d = pred_3d.contiguous().view(n, seq_len, -1, 3)[:, input_n:, :, :]
         targ_p3d = all_seq.contiguous().view(n, seq_len, -1, 3)[:, input_n:, :, :]
 
-        #*************************计算各个点的误差**************************
+
         for i, chip in enumerate(even_point):
             for k in np.arange(0, len(eval_frame)):
                 j = eval_frame[k]
                 chip[k] += torch.mean(torch.norm(
                     targ_p3d[:, j, i, :].contiguous().view(-1, 3) - pred_p3d[:, j, i, :].contiguous().view(-1, 3),
                     2,1)).cpu().data.numpy().reshape(1, -1)[0] * n  # 改
-        # ************************计算分肢的误差**********************
-        # for limb, use in zip(limb_ls, limb_use):
-        #     for k in np.arange(0, len(eval_frame)):
-        #         j = eval_frame[k]
-        #         limb[k] += torch.mean(torch.norm(
-        #             targ_p3d[:, j, use, :].contiguous().view(-1, 3) - pred_p3d[:, j, use, :].contiguous().view(-1, 3), 2,
-        #             1)).cpu().data.numpy().reshape(1,-1)[0] *n #改
 
         for k in np.arange(0, len(eval_frame)):
             j = eval_frame[k]
@@ -331,8 +324,6 @@ def tes(train_loader, model, input_n=20, output_n=50, is_cuda=False, dim_used=[]
                                                                          time.time() - st)
         bar.next()
     bar.finish()
-    # for i in range(len(limb_ls)):
-    #     limb_ls[i] = limb_ls[i]/N
     for chip in even_point:
         for i in range(len(chip)):
             chip[i] = chip[i]/N
