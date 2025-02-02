@@ -20,5 +20,7 @@ python main_cmu_3d.py --data_dir_cmu [Path To Your CMU data] --input_n 10 --outp
 
 ## File description
 main.py：Represents a file for training different data sets
+
 data_until.py:Used to extract data set for train
+
 model：Model file
