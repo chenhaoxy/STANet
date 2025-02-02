@@ -24,3 +24,12 @@ main.py：Represents a file for training different data sets
 data_until.py:Used to extract data set for train
 
 model：Model file
+
+```
+@article{,
+  title={Dynamic Spatiotemporal Feature Cross-Extraction for Accurate Human Motion Prediction with STANet
+},
+  author={Hao, Chen and Haozhi, Wang and Xiaoying, Pan},
+  journal={The Visual Computer},
+}
+```
